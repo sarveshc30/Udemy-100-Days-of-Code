@@ -37,3 +37,5 @@ print(response.status_code)
 # Delete Request
 response = session.delete(url=URL, auth=auth)
 print(response.status_code)
+
+session.close()
