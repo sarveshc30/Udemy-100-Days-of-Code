@@ -8,11 +8,14 @@ URL = "https://beelinkdirect.com/wp-json/wp/v2/posts?_fields=id,title,content&pa
 response = session.get(url=URL)
 print(response.status_code)
 data = json.dumps(response.json(), indent=2)
-print(data)
+print(data[:50])
 
 
 # POST Request
-auth = HTTPBasicAuth(username='aditya', password='qee9 NRfx 9LM4 3SZf IEkN EX3W')
+with open(r'F:\IotIot\Resources\credentials.txt' , 'r') as file:
+    credentials = json.load(file)
+
+auth = HTTPBasicAuth(username=credentials['username'], password=credentials['password'])
 content = {
     "title": "Post by Sarvesh",
     "content": "Rest API using Python",
@@ -22,7 +25,7 @@ URL = "https://beelinkdirect.com/wp-json/wp/v2/posts/"
 response = session.post(url=URL, auth=auth, json=content)
 print(response.status_code)
 data = json.dumps(response.json(), indent=2)
-print(data)
+print(data[:50])
 
 
 # Patch/ Update Request
@@ -35,6 +38,7 @@ print(response.status_code)
 
 
 # Delete Request
+URL = URL + "?force=true"
 response = session.delete(url=URL, auth=auth)
 print(response.status_code)
 
